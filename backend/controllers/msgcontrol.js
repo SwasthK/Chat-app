@@ -1,8 +1,6 @@
 const Userconversations = require("../models/conversation");
 const Usermsgmodel = require("../models/msgmodel");
 
-
-
 const sendmsg = async (req, res) => {
     try {
         const { id: recieverid } = req.params;
@@ -41,4 +39,29 @@ const sendmsg = async (req, res) => {
     }
 }
 
-module.exports = sendmsg
+const getmessages = async (req, res) => {
+    try {
+        const { id: friendId } = req.params
+        const senderid = req.sender._id
+
+        const isconversation = await Userconversations.findOne({
+            participants: {
+                $all: [friendId, senderid]
+            }
+        }).populate("messages");
+
+        if (!isconversation) {
+            return res.status(201).json({})
+        }
+
+        res.status(201).json(isconversation.messages)
+
+    } catch (error) {
+        console.log(error);
+        res.status(401).json({
+            msg: "Internal server error"
+        })
+    }
+}
+
+module.exports = { sendmsg, getmessages }
