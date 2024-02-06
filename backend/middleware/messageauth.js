@@ -16,7 +16,6 @@ const authmiddleware = async (req, res, next) => {
         const SECRET = process.env.JWT_SECRET_KEY
 
         const verifyuser = jwt.verify(token, SECRET)
-        console.log(verifyuser.id);
 
         if (!verifyuser) {
             res.status().json({
