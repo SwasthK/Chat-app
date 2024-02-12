@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import toast, { Toaster } from 'react-hot-toast';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signin from "./pages/signin/signin";
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/signin" element={<Signin />}></Route>
       </Routes>
+      <Toaster></Toaster>
     </BrowserRouter>
   );
 }

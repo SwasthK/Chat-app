@@ -16,7 +16,6 @@ export const Messages = () => {
         <Recieve></Recieve>
         <Recieve></Recieve>
         <Recieve></Recieve>
-        
       </div>
       <Inputmsg></Inputmsg>
     </div>
