@@ -4,8 +4,9 @@ const generatetoken = require('../utils/tokens')
 
 const signup = async (req, res) => {
     try {
+        console.log("reached");
         const { fullname, username, password, confirmpassword, gender } = req.body
-
+        console.log(req.body);
         if (password !== confirmpassword) {
             return res.status(400).json({ msg: "password does not match" })
         }
@@ -82,6 +83,7 @@ const login = async (req, res) => {
 };
 
 const logout = (req, res) => {
+    
     try {
         res.cookie("token", "", {
             maxAge: 0

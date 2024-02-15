@@ -1,5 +1,6 @@
 const express = require('express')
 const dotenv = require('dotenv')
+const cors = require('cors')
 dotenv.config()
 
 const user = require('./routes/user')
@@ -11,6 +12,7 @@ const cookieParser = require('cookie-parser')
 const alluserRouter = require('./routes/globalusers')
 
 const app = express()
+app.use(cors());
 app.use(cookieParser())
 app.use(express.json())
 

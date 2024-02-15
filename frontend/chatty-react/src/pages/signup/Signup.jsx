@@ -58,7 +58,7 @@ const signup = () => {
         >
           already logged? please login
         </Link>
-        <Button text="signup"></Button>
+        <Button text="signup" loading={loading}></Button>
       </div>
     </form>
   );

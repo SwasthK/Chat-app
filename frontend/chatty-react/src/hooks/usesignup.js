@@ -1,8 +1,10 @@
 import { useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
+import { useauthcontext } from "../context/usercontext";
 
 function useSignup() {
     const [loading, setloading] = useState(false)
+    const { setauthstate } = useauthcontext();
     const sign = async ({ fullname, username, password, cpassword, gender }) => {
         const pass = errhandle(fullname, username, password, cpassword, gender)
         setloading(true)
@@ -24,15 +26,17 @@ function useSignup() {
             if (data.msg) {
                 toast.error(data.msg)
             }
+            localStorage.setItem("info", JSON.stringify(data))
+            setauthstate(data)
             console.log(data);
         } catch (error) {
             toast.error(error.message)
         }
         finally {
-            setloading(true)
+            setloading(false)
         }
     };
-    return { sign };
+    return { loading, sign };
 }
 
 function errhandle(fullname, username, password, cpassword, gender) {
